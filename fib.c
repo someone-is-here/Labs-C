@@ -21,8 +21,7 @@ unsigned long int giveResNum(int* copyK, unsigned long int num) {
 }
 
 unsigned long int findRes(int k) {
-	int res = -1;
-	 
+	int res = -1; 
 	if (k > 0 && k < 245) {
 		int copyK = k;
 		unsigned long int num1 = 1, num2 = 1, buffNum = 0;
