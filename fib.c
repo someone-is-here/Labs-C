@@ -29,7 +29,8 @@ unsigned long int findRes(int k) {
 			res = num1;
 		}
 		else {
-			for (int i = 0; i < k; i++) {
+			int i;
+			for (i = 0; i < k; i++) {
 				buffNum = num2;
 				num2 += num1;
 				num1 = buffNum;
