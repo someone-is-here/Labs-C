@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <assert.h>
 #include "fib.h"
 
 int findNum(unsigned long num) {
@@ -21,6 +22,7 @@ unsigned long int giveResNum(int* copyK, unsigned long int num) {
 
 unsigned long int findRes(int k) {
 	int res = -1;
+	 
 	if (k > 0 && k < 245) {
 		int copyK = k;
 		unsigned long int num1 = 1, num2 = 1, buffNum = 0;
@@ -36,6 +38,7 @@ unsigned long int findRes(int k) {
 				num1 = buffNum;
 				copyK -= findNum(num2);
 				if (copyK <= 0) {
+					assert(&copyK != NULL);
 					res = giveResNum(&copyK, num2);
 					break;
 				}
@@ -54,17 +57,20 @@ unsigned long int findRes(int k) {
 
 int main() {
 	int k;
-	scanf("%d", &k);
-	printf("\n");
-	if (k > 0) {
-		printf("Result:  %d\n\n", findRes(k));
-	}
-	else if (k >= 245) {
-		printf("Number is too big");
-	}
-	else {
+	if (scanf("%d", &k) != 1) {
 		printf("Wrong input!!!");
 	}
-
+	else {
+		printf("\n");
+		if (k > 0) {
+			printf("Result:%d -  %d\n\n",k, findRes(k));
+		}
+		else if (k >= 245) {
+			printf("Number is too big");
+		}
+		else {
+			printf("Wrong input!!!");
+		}
+	}
 	return 0;
 }
