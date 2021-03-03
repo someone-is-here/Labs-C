@@ -1,31 +1,17 @@
 #include "fib.h"
 #include <assert.h>
 
-int testNum() {
-	assert(findRes(1) == 1);
+void testNum(int num, int res) {
+	assert(findRes(num) == res);
 }
-int testNum1() {
-	assert(findRes(45) == 6);
-}
-int testNum2() {
-	assert(findRes(13) == 5);
-}
-int testNum3() {
-	assert(findRes(234) == 3);
-}
-int testNum4() {
-	assert(findRes(243) == 7);
-}
-int testNum5() {
-	assert(findRes(243382) == -1);
-}
-
 #undef main
 int main() {
-	testNum();
-	testNum2();
-	testNum3();
-	testNum4();
-	testNum5();
+	testNum(1,1);
+	testNum(45,7);
+	testNum(13,5);
+	testNum(234,3);
+	testNum(243,7);
+	testNum(243382,-1);
+
 	return 0;
 }
