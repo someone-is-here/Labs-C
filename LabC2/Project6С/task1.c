@@ -216,14 +216,14 @@ int main() {
 
 	double x;
 	int n;
-	if (scanf("%f", &x) && scanf("%d", &n)) {
+	if (scanf("%lf", &x) && scanf("%d", &n)) {
 		printf("\n\n%.100f\n", findDif(x, n));
 		printf("%.100f\n", calculateRec(x, n, 0.0));
 
 	}
 
 	double eps;
-	if (scanf("%f", &x) && scanf("%f", &eps)) {
+	if (scanf("%lf", &x) && scanf("%lf", &eps)) {
 		printf("%d\n", findN(x, eps));
 	}
 
