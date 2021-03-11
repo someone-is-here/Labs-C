@@ -150,7 +150,7 @@ void taskBSUIRInfo() {
 					printf("Enter your physics score \n");
 					if (scanf("%d", &physicsScore) == 1) {
 						printf("Enter the certificate score \n");
-						if (scanf("%Lf", &certificateScore) == 1) {
+						if (scanf("%lf", &certificateScore) == 1) {
 							chooseFaculty(langScore, mathScore, physicsScore, certificateScore);
 						}
 					}
