@@ -210,7 +210,7 @@ int findN(double x, double eps) {
 	return i;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
 	setlocale(LC_ALL, "Russian");
 	taskBSUIRInfo();
 
