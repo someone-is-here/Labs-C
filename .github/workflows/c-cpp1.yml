@@ -1,3 +1,4 @@
+
 name: C/C++ CI
 
 on:
@@ -13,7 +14,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: configure
-      run: ./configure
     - name: make
-      run: make
+      run: make -C LabC1/Project3С/
