@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <malloc.h>
+#include <stdlib.h>
 
 int readM(char fileName[9]) {
 	FILE* myfile;
@@ -62,8 +63,6 @@ int** readArrayFromFile(char fileName[9]) {
 					}
 				}
 			}
-
-			printArray(array, m, n);
 			fclose(myfile);
 			return array;
 		}
