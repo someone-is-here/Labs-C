@@ -44,7 +44,6 @@ int findSquare(int** array, int m, int n, int size) {
 					
 				}
 				if (counter == size * size) {
-					printf("found!!!\n");
 					numOfSquares++;
 				}
 			}
