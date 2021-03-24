@@ -1,9 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Header.h"
 #include <stdio.h>
-#include <malloc.h>
 #include <stdlib.h>
-#include <math.h>
 
 void printArray(int** array, int m, int n) {
 	int i, j;
