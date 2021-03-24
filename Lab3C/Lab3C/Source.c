@@ -2,6 +2,7 @@
 #include "Header.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 void printArray(int** array, int m, int n) {
 	int i, j;
