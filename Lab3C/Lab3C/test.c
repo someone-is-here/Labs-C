@@ -2,7 +2,6 @@
 #include "Header.h"
 #include <stdio.h>
 #include <assert.h>
-#include <malloc.h>
 #include <stdlib.h>
 
 int readM(char fileName[9]) {
