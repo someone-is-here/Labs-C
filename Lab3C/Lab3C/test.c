@@ -25,9 +25,7 @@ int readN(char fileName[9]) {
 		printf("can't open file");
 	}
 	else {
-		if (fscanf(myfile, "%d %d", &m, &n) == 2) {
-			printf("%d\n", n);
-		}
+		if (fscanf(myfile, "%d %d", &m, &n) == 2)
 		fclose(myfile);
 	}
 	return n;
@@ -36,7 +34,6 @@ int** readArrayFromFile(char fileName[9]) {
 	FILE* myfile;
 	myfile = fopen(fileName, "r");
 	int m, n;
-	//printf("Enter m & n\n");
 	if (fscanf(myfile,"%d %d", &m, &n) == 2) {
 		int** array = (int**)malloc(m * sizeof(int*));
 		if (array != NULL) {
