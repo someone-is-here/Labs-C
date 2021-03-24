@@ -63,7 +63,7 @@ int main() {
 	else {
 		printf("\n");
 		if (k > 0) {
-			printf("Result:%d -  %d\n\n",k, findRes(k));
+			printf("Result:%d -  %ld\n\n",k, findRes(k));
 		}
 		else if (k >= 245) {
 			printf("Number is too big");
