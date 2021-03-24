@@ -13,9 +13,7 @@ int readM(char fileName[9]) {
 		printf("can't open file");
 	}
 	else {
-		if (fscanf(myfile, "%d", &m) == 1) {
-			printf("%d\n", m);
-		}
+		if (fscanf(myfile, "%d", &m) == 1) 
 		fclose(myfile);
 	}
 	return m;
