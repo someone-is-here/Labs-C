@@ -1,4 +1,4 @@
-#ifdef HEADER
+#ifndef HEADER
 #define HEADER_H
 void printArray(int** array, int m, int n);
 int findSquare(int** array, int m, int n, int size);
