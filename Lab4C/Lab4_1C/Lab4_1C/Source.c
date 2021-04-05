@@ -17,6 +17,7 @@ int checkWord(char str[100],int size) {
 		case 'М':
 		case 'Н':
 		case 'К':
+			printf("%c ",str[i]);
 			counter++;
 			break;
 		}
