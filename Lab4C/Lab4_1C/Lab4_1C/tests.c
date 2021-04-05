@@ -5,6 +5,7 @@
 #include <locale.h>
 
 void test(char fileName[9], char fileInput[9]) {
+	rintf("function\n");
 	readFile(fileInput, 0);
 	char ch, ch1;
 	FILE* file = fopen("output.txt", "r");
