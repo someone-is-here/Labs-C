@@ -5,7 +5,6 @@
 #include <locale.h>
 
 void test(char fileName[9], char fileInput[9]) {
-	printf("function\n");
 	readFile(fileInput, 0);
 	char ch, ch1;
 	FILE* file = fopen("output.txt", "r");
@@ -13,7 +12,6 @@ void test(char fileName[9], char fileInput[9]) {
 	if (file != NULL && file1 != NULL) {
 		while (feof(file) == 0 && feof(file1) == 0) {
 			if (fscanf(file, "%c", &ch) && fscanf(file1, "%c", &ch1)) {
-				printf("%c  %c\n",ch,ch1);
 				assert(ch == ch1);
 			}
 		}
