@@ -9,12 +9,9 @@ void test(char fileName[9], char fileInput[9]) {
 	char ch, ch1;
 	FILE* file = fopen("output.txt", "r");
 	FILE* file1 = fopen(fileName, "r");
-	printf("here\n");
 	if (file != NULL && file1 != NULL) {
-		printf("open file\n");
 		while (feof(file) == 0 && feof(file1) == 0) {
 			if (fscanf(file, "%c", &ch) && fscanf(file1, "%c", &ch1)) {
-				printf("[%c]  --  [%c]\n",ch,ch1);
 				assert(ch == ch1);
 			}
 		}
