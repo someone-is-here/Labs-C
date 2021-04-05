@@ -6,17 +6,17 @@ int checkWord(char str[100],int size) {
 	int counter = 0;
 	for (int i = 0; i < size; i++) {
 		switch (str[i]) {
-		case 'À':
-		case 'Â':
-		case 'Ñ':
-		case 'Å':
-		case 'Ò':
-		case 'Î':
-		case 'Ð':
-		case 'Õ':
-		case 'Ì':
-		case 'Í':
-		case 'Ê':
+		case 'Ð':
+		case 'Ð’':
+		case 'Ð¡':
+		case 'Ð•':
+		case 'Ð¢':
+		case 'Ðž':
+		case 'Ð ':
+		case 'Ð¥':
+		case 'Ðœ':
+		case 'Ð':
+		case 'Ðš':
 			counter++;
 			break;
 		}
