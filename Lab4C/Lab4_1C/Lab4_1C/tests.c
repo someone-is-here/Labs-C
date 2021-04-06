@@ -6,7 +6,7 @@
 
 void test(char fileName[9], char fileInput[9]) {
 	readFile(fileInput, 0);
-	unsigned char ch, ch1;
+	char ch, ch1;
 	FILE* file = fopen("output.txt", "r");
 	FILE* file1 = fopen(fileName, "r");
 	if (file != NULL && file1 != NULL) {
