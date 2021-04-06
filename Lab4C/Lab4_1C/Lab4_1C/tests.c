@@ -12,6 +12,7 @@ void test(char fileName[9], char fileInput[9]) {
 	if (file != NULL && file1 != NULL) {
 		while (feof(file) == 0 && feof(file1) == 0) {
 			if (fscanf(file, "%c", &ch) && fscanf(file1, "%c", &ch1)) {
+				printf("%c --  %c",ch,ch1);
 				assert(ch == ch1);
 			}
 		}
