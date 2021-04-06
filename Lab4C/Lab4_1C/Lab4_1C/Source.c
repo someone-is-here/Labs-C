@@ -17,7 +17,6 @@ int checkWord(unsigned char str[100],int size) {
 		case 'М':
 		case 'Н':
 		case 'К':
-			printf("%c ",str[i]);
 			counter++;
 			break;
 		}
@@ -25,8 +24,8 @@ int checkWord(unsigned char str[100],int size) {
 	return counter;
 }
 void readFile(char fileName[9], int num) {
-	unsigned char ch;
-	unsigned char * word = (unsigned char *)malloc(sizeof(unsigned char ) * 100);
+	char ch;
+	char * word = (char *)malloc(sizeof(char ) * 100);
 	int index = 0;
 	FILE* file = fopen(fileName, "r");
 	FILE* file1 = fopen("output.txt", "w");
