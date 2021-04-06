@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <locale.h>
-int checkWord(char str[100],int size) {
+int checkWord(unsigned char str[100],int size) {
 	int counter = 0;
 	for (int i = 0; i < size; i++) {
 		switch (str[i]) {
@@ -25,8 +25,8 @@ int checkWord(char str[100],int size) {
 	return counter;
 }
 void readFile(char fileName[9], int num) {
-	char ch;
-	char* word = (char*)malloc(sizeof(char) * 100);
+	unsigned char ch;
+	unsigned char * word = (unsigned char *)malloc(sizeof(unsigned char ) * 100);
 	int index = 0;
 	FILE* file = fopen(fileName, "r");
 	FILE* file1 = fopen("output.txt", "w");
