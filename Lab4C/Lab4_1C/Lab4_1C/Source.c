@@ -6,17 +6,17 @@ int checkWord(unsigned char str[100],int size) {
 	int counter = 0;
 	for (int i = 0; i < size; i++) {
 		switch (str[i]) {
-		case 'А':
-		case 'В':
-		case 'С':
-		case 'Е':
-		case 'Т':
-		case 'О':
-		case 'Р':
-		case 'Х':
-		case 'М':
-		case 'Н':
-		case 'К':
+		case -64:
+		case -62:
+		case -47:
+		case -59:
+		case -46:
+		case -50:
+		case -48:
+		case -43:
+		case -52:
+		case -51:
+		case -54:
 			counter++;
 			break;
 		}
