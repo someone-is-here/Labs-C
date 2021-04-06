@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <locale.h>
-int checkWord(unsigned char str[100],int size) {
+int checkWord(char str[100],int size) {
 	int counter = 0;
 	for (int i = 0; i < size; i++) {
 		switch (str[i]) {
