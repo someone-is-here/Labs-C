@@ -16,4 +16,4 @@ jobs:
     - name: configure
       run: ./configure
     - name: make
-      run: make -C/Lab5C/Lab5C/
+      run: make -C Lab5C/Lab5C/
