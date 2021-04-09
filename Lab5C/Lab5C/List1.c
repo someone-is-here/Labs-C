@@ -57,11 +57,16 @@ void Mult(List* list, const int multNum) {
 }
 void ResultInFile(List* list) {
 	FILE* file = fopen("output.txt", "w");
-	Node* newNode = list->head;
-	for (int i = 0; i < list->size; i++) {
-		fprintf(file, "%d", newNode->digit);
-		newNode = newNode->next;
+	if (file != NULL) {
+		Node* newNode = list->head;
+		for (int i = 0; i < list->size; i++) {
+			fprintf(file, "%d", newNode->digit);
+			newNode = newNode->next;
+		}
+		fclose(file);
 	}
-	fclose(file);
+	else {
+		printf("Can't write into file");
+	}
 }
 
