@@ -1,8 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Header.h"
+#include <assert.h>
 
 void fact(int num) {
 	List* list = (List*)malloc(sizeof(List));
+	assert(list != NULL);
 	list->head = list->tail = NULL;
 	list->size = 0;
 	AddDigit(list, 1);
