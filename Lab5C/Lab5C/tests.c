@@ -7,18 +7,18 @@ void tests(char fileName[10], int numb) {
 	FILE* file = fopen("output.txt", "r");
 	FILE* file1 = fopen(fileName, "r");
 	int num, num1;
-	if (file != NULL && file1 != NULL) {
-		while (feof(file) == 0 && feof(file1) == 0) {
-			if (fscanf(file, "%d", &num) && fscanf(file1, "%d", &num1)) {
-				assert(num == num1);
-			}
+
+	assert(file != NULL);
+	assert(file1 != NULL);
+
+	while (feof(file) == 0 && feof(file1) == 0) {
+		if (fscanf(file, "%d", &num) && fscanf(file1, "%d", &num1)) {
+			assert(num == num1);
 		}
-		fclose(file1);
-		fclose(file);
 	}
-	else {
-		printf("Wrong file\n");
-	}
+
+	fclose(file1);
+	fclose(file);
 }
 
 #undef main
