@@ -26,6 +26,6 @@ void tests(char input[10],char fileName[10]) {
 
 int main() {
 	tests("input.txt", "test1.txt");
-	tests("inpu1.txt", "test2.txt");
+	//tests("inpu1.txt", "test2.txt");
 	return 0;
 }
