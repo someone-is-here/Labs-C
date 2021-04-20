@@ -1,7 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Header.h"
-#define size 15
-#include <time.h>
 #include <assert.h>
 
 void tests(char input[10],char fileName[10]) {
