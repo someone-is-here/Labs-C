@@ -14,4 +14,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: make
-      run: make -C Lab5C/Lab5C/
+      run: make -C Lab6C/Lab6C/
