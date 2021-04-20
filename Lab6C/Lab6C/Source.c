@@ -18,10 +18,8 @@ void FullFillTrees(char fileName[10]) {
 		while (symb != '\n') {
 			if (fscanf(file0, "%d%c", &num, &symb) == 2) {
 				addNode(&root, num);
-				printf("%d ", num);
 			}
 		}
-		printf("\n");
 		rootsArray[i] = root;
 	}
 	fclose(file0);
