@@ -10,7 +10,6 @@ void FullFillTrees(char fileName[10]) {
 	int num, numValue;
 	char symb;
 	assert(rootsArray != NULL);
-	
 	FILE* file0 = fopen("treeInput.txt", "r");
 	assert(file0 != NULL);
 	for (int i = 0; i < size; i++) {
@@ -29,6 +28,7 @@ void FullFillTrees(char fileName[10]) {
 
 	FILE* file = fopen(fileName, "r");
 	assert(file != NULL);
+
 	while (feof(file) == 0) {
 		if (fscanf(file, "%d %c %d\n", &num, &symb, &numValue) == 3) {
 			addNodeQueue(&queue, num, symb, numValue);
