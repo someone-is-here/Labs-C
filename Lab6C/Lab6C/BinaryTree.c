@@ -15,7 +15,7 @@ void addNode(Node** root, int value) {
 		addNode(&((*root)->left), value);
 	}
 	else {
-		//assert(value != (*root)->value);
+		assert(value != (*root)->value);
 		addNode(&((*root)->right), value);
 	}
 }
