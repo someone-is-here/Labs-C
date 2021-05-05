@@ -5,22 +5,22 @@
 void test(char fileName[11]) {
 	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
 	assert(base != NULL);
-	base->head = base->tail = NULL;
-	base->size = 0;
-	readBaseFromFile(base);
-	delStudent(base,"Tatiana", "Shurko");
-	BaseInFile(base, "resul.txt");
-	FILE* file0 = fopen(fileName, "r");
+// 	base->head = base->tail = NULL;
+// 	base->size = 0;
+// 	readBaseFromFile(base);
+// 	delStudent(base,"Tatiana", "Shurko");
+// 	BaseInFile(base, "resul.txt");
+	FILE* file0 = fopen("resul.txt", "r");
 	FILE* file1= fopen("resul.txt", "r");
 	assert(file0 != NULL && file1 != NULL);
 	char ch, ch1;
 	while (feof(file0) == 0 && feof(file1) == 0){
 		if (fscanf(file0, "%c", &ch) && fscanf(file1, "%c", &ch1)) {
 			printf("%c %c\n",ch,ch1);
-			if(ch != ch1){
-				printf("Error\n");
-			}
-			//assert(ch == ch1);
+// 			if(ch != ch1){
+// 				printf("Error\n");
+// 			}
+			assert(ch == ch1);
 		}
 	}
 	deleteBase(base);
@@ -57,6 +57,6 @@ void test1(char fileName[12]) {
 #undef main
 int main() {
 	test("result.txt");
-	test1("Result1.txt");
+	//test1("Result1.txt");
 	return 0;
 }
