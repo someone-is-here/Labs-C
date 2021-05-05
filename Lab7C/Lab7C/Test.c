@@ -17,6 +17,9 @@ void test(char fileName[11]) {
 	while (feof(file0) == 0 && feof(file1) == 0){
 		if (fscanf(file0, "%c", &ch) && fscanf(file1, "%c", &ch1)) {
 			printf("%c %c\n",ch,ch1);
+			if(ch != ch1){
+				printf("Error\n");
+			}
 			//assert(ch == ch1);
 		}
 	}
