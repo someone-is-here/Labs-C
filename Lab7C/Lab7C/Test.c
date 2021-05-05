@@ -40,6 +40,7 @@ void test(char fileName[11]) {
 	fclose(file1);
 }
 void test1(char fileName[12]) {
+	printf("TEST@\n\n\n");
 	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
 	assert(base != NULL);
 	base->head = base->tail = NULL;
@@ -69,6 +70,6 @@ void test1(char fileName[12]) {
 #undef main
 int main() {
 	test("result.txt");
-	//test1("result1.txt");
+	test1("result1.txt");
 	return 0;
 }
