@@ -1,0 +1,3 @@
+﻿  Source.c
+C:\Users\Админ\source\repos\Lab7C\Lab7C\Source.c(278,7): warning C4013: 'exit' undefined; assuming extern returning int
+  Lab7C.vcxproj -> C:\Users\Админ\source\repos\Lab7C\Debug\Lab7C.exe
