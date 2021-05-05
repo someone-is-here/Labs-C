@@ -133,14 +133,9 @@ ScholarShip: 126.179000
 Average score: 10.000000
 Social allowance: 0
 Number of petitions: 0
-Name: Shurko Tatiana
-ScholarShip: 181.000000
-Average score: 9.987600
-Social allowance: 1
-Number of petitions: 5
-Name: Shurko Tatiana
-ScholarShip: 181.000000
-Average score: 9.987600
-Social allowance: 1
-Number of petitions: 5
-Total sum: 3823.654000
+Name: Shlypo Elizabeth
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Total sum: 3533.012000
