@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <assert.h>
 #include <locale.h>
-#include <conio.h>
 #include <string.h>
 
 void addStudent(BaseWithStudents* base, Student* stud) {
@@ -213,7 +212,7 @@ void showMenu(BaseWithStudents* base) {
 	Student* alice = (Student*)malloc(sizeof(Student));
 	char name[50];
 	char surname[50];
-	switch (getch()) {
+	switch (getchar()) {
 	case '1':
 		printf("Enter name and surname\n");
 		assert(scanf("%s %s",alice->name, alice->surname) == 2);
