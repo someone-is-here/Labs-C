@@ -22,7 +22,7 @@ void test(char fileName[11]) {
 	strcpy(stud->surname, surname);
 	setScholarShip(stud);
 	addStudent(base, stud);
-	showAllBase(base);
+	//showAllBase(base);
 	delStudent(base, "Zak", "Michell");
 	BaseInFile(base, "output.txt");
 	FILE* file0 = fopen("output.txt", "r");
@@ -47,7 +47,7 @@ void test1(char fileName[12]) {
 	setSocialAllowance(base, "Tatiana", "Shurko");
 	addPetitions(base, "Tatiana", "Shurko", 5);
 	changeAverageScore(base, "Tatiana", "Shurko", 8.7876);
-	printStatement(base);
+	//printStatement(base);
 	BaseInFile(base, "outpu1.txt");
 	deleteBase(base);
 	printf("\n\n\nStart compare\n\n\n");
