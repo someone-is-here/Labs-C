@@ -50,7 +50,7 @@ void test1(char fileName[12]) {
 	printStatement(base);
 	BaseInFile(base, "outpu1.txt");
 	deleteBase(base);
-
+	printf("\n\n\nStart compare\n\n\n");
 	FILE* file0 = fopen(fileName, "r");
 	FILE* file1 = fopen("outpu1.txt", "r");
 	assert(file0 != NULL && file1 != NULL);
@@ -68,6 +68,6 @@ void test1(char fileName[12]) {
 #undef main
 int main() {
 	test("result.txt");
-	//test1("result1.txt");
+	test1("result1.txt");
 	return 0;
 }
