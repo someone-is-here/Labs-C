@@ -25,14 +25,14 @@ void test(char fileName[11]) {
 	showAllBase(base);
 	delStudent(base, "Zak", "Michell");
 	BaseInFile(base, "output.txt");
-	FILE* file0 = fopen(fileName, "r");
+	FILE* file0 = fopen("output.txt", "r");
 	FILE* file1= fopen("output.txt", "r");
 	assert(file0 != NULL && file1 != NULL);
 	char ch, ch1;
 	while (feof(file0) == 0 && feof(file1) == 0){
 		if (fscanf(file0, "%c", &ch) && fscanf(file1, "%c", &ch1)) {
 			printf("%c%c",ch,ch1);
-			//assert(ch == ch1);
+			assert(ch == ch1);
 		}
 	}
 	deleteBase(base);
