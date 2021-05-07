@@ -1,0 +1,146 @@
+Name: Akinshev Dmitry
+ScholarShip: 78.862000
+Average score: 5.900000
+Social allowance: 1
+Number of petitions: 0
+Name: Bondarkov Daniil
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Burakov Dmitry
+ScholarShip: 126.179000
+Average score: 9.800000
+Social allowance: 0
+Number of petitions: 0
+Name: Burko Liana
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Volkovsky Oleg
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Vorobei Elena
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Gavrilik Artyom
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 1
+Number of petitions: 0
+Name: Goncharov Mikhail
+ScholarShip: 94.634000
+Average score: 7.800000
+Social allowance: 5
+Number of petitions: 0
+Name: Grigorchuk Mikhail
+ScholarShip: 181.000000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 1
+Name: Grishilov Vlad
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Gutorov Pasha
+ScholarShip: 94.634000
+Average score: 7.700000
+Social allowance: 1
+Number of petitions: 0
+Name: Dembovsky Artem
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Ermolaev Nikita
+ScholarShip: 110.405000
+Average score: 8.200000
+Social allowance: 0
+Number of petitions: 0
+Name: Kozlov Vadim
+ScholarShip: 181.000000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 1
+Name: Kononovich Stas
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 1
+Number of petitions: 0
+Name: Krivetsky Roman
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Krishtafovich Karina
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Lazarev Dmitry
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Magazinnikova Sofia
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Savchuk Maxim
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Sidorko Veronica
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Simakov Egor
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Slutsky Nikita
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Sokolyuk Danila
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Solyanik Anton
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Ulasevich Artyom
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Shlypo Elizabeth
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Name: Shurko Tatiana
+ScholarShip: 181.000000
+Average score: 8.787600
+Social allowance: 1
+Number of petitions: 5
+Name: Shcherbaty Alexey
+ScholarShip: 126.179000
+Average score: 10.000000
+Social allowance: 0
+Number of petitions: 0
+Total sum: 3697.473000

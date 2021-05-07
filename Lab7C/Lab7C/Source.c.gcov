@@ -1,0 +1,381 @@
+        -:    0:Source:Source.c
+        -:    0:Programs:1
+        -:    0:Source is newer than graph
+        -:    1:#define _CRT_SECURE_NO_WARNINGS
+        -:    2:#include "Header.h"
+        -:    3:#include <stdio.h>
+        -:    4:#include <assert.h>
+        -:    5:#include <locale.h>
+        -:    6:#include <string.h>
+        -:    7:
+       59:    8:void addStudent(BaseWithStudents* base, Student* stud) {
+       59:    9:	assert(stud != NULL);
+       59:   10:	Node* node = (Node*) malloc (sizeof(Node));
+       59:   11:	node->next = NULL;
+       59:   12:	node->prev = NULL;
+       59:   13:	node->person = *stud;
+       59:   14:	if (base->head == NULL) {
+        2:   15:		base->head = base->tail = node;
+        2:   16:		base->size++;
+        -:   17:	}
+        -:   18:	else{
+       57:   19:		base->tail->next = node;
+       57:   20:		node->prev = base->tail;
+       57:   21:		base->tail = node;
+       57:   22:		base->size++;
+        -:   23:	}
+       59:   24:}
+        3:   25:void delStudent(BaseWithStudents* base, char name[50], char surname[50]) {
+        3:   26:	assert(base != NULL);
+        3:   27:	Node* node = base->head;
+       60:   28:	while (node != NULL) {
+       57:   29:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        3:   30:			if (node->next != NULL) {
+        2:   31:				node->next->prev = node->prev;
+        -:   32:			}
+        -:   33:			else {
+        1:   34:				base->tail= node->prev;
+        -:   35:			}
+        3:   36:			if (node->prev != NULL) {
+        2:   37:				node->prev->next = node->next;
+        -:   38:			}
+        -:   39:			else {
+        1:   40:				base->head = node->next;
+        -:   41:			}
+        3:   42:			base->size--;
+        3:   43:			break;
+        -:   44:		}
+       54:   45:		node = node->next;
+        -:   46:	}
+        3:   47:}
+        1:   48:void showAllBase(BaseWithStudents* base) {
+        1:   49:	assert(base != NULL);
+        1:   50:	Node* node = base->head;
+       29:   51:	for (int i = 0; i < base->size; i++) {
+       28:   52:		printf("{%d}", i);
+       28:   53:		printf("Name: %s %s\n", node->person.surname, node->person.name);
+       28:   54:		printf("ScholarShip: %lf\n", node->person.scholarship);
+       28:   55:		printf("Average score: %lf\n", node->person.averageScore);
+       28:   56:		printf("Social allowance: %d\n", node->person.socialAllowance);
+       28:   57:		printf("Number of petitions: %d\n", node->person.anyPetitions);
+       28:   58:		node = node->next;
+        -:   59:	}
+        1:   60:}
+        2:   61:void deleteBase(BaseWithStudents* base) {
+        2:   62:	assert(base != NULL);
+        2:   63:	Node* node = base->head;
+       58:   64:	while (node->next != NULL){
+       54:   65:		node = node->next;
+       54:   66:		free(node->prev);
+        -:   67:	}
+        2:   68:	free(node);
+        2:   69:	base = NULL;
+        2:   70:}
+        2:   71:void readBaseFromFile(BaseWithStudents* base) {
+        2:   72:	assert(base != NULL);
+        2:   73:    FILE* fin = fopen("base.txt","r"); 
+        2:   74:	assert(fin != NULL);
+        2:   75:	int num = 0;
+       62:   76:	while (num < 29) {
+       58:   77:		Student* stud = (Student*)malloc(sizeof(Student));
+       58:   78:		assert(stud != NULL);
+       58:   79:		assert(fscanf(fin, "%s %s", stud->surname, stud->name) == 2);
+       58:   80:		assert(fscanf(fin, "%lf", &stud->averageScore) == 1);
+       58:   81:		assert(fscanf(fin, "%d", &stud->socialAllowance) == 1);
+       58:   82:		assert(fscanf(fin, "%d", &stud->anyPetitions) == 1);
+       58:   83:		setScholarShip(stud);
+       58:   84:		addStudent(base, stud);
+       58:   85:		num++;
+        -:   86:	}
+        -:   87:
+        2:   88:	fclose(fin);
+        2:   89:}
+       62:   90:void setScholarShip(Student* stud) {
+       62:   91:	assert(stud != NULL);
+       62:   92:	stud->scholarship = 0;
+       62:   93:	if (stud->socialAllowance == 1) {
+       12:   94:		stud->scholarship = 135.000;
+        -:   95:	}
+       62:   96:	if (stud->anyPetitions) {
+        6:   97:		stud->scholarship = 181.000;
+        -:   98:	}
+        -:   99:	else {
+       56:  100:		if (stud->averageScore >= 5 && stud->averageScore < 6) {
+        3:  101:			stud->scholarship = 78.862;
+        -:  102:		}
+       53:  103:		else if (stud->averageScore >= 6 && stud->averageScore < 8) {
+        4:  104:			stud->scholarship = 94.634;
+        -:  105:		}
+       49:  106:		else if (stud->averageScore >= 8 && stud->averageScore < 9) {
+        2:  107:			stud->scholarship = 110.405;
+        -:  108:		}
+       47:  109:		else if (stud->averageScore >= 9 && stud->averageScore <= 10) {
+       47:  110:			stud->scholarship = 126.179;
+        -:  111:		}
+        -:  112:	}
+       62:  113:}
+        -:  114:
+        1:  115:void changeAverageScore(BaseWithStudents* base, char name[50], char surname[50], double newAverageScore) {
+        1:  116:	assert(base != NULL);
+        1:  117:	assert(newAverageScore >= 0 && newAverageScore <= 10.0);
+        1:  118:	Node* node = base->head;
+       29:  119:	while (node != NULL) {
+       28:  120:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        1:  121:			node->person.averageScore = newAverageScore;
+        1:  122:			setScholarShip(&node->person);
+        1:  123:			break;
+        -:  124:		}		
+       27:  125:		node = node->next;
+        -:  126:	}
+        1:  127:}
+    #####:  128:void changeName(BaseWithStudents* base, char name[50], char surname[50], char newName[50]) {
+    #####:  129:	assert(base != NULL);
+    #####:  130:	Node* node = base->head;
+    #####:  131:	while (node != NULL) {
+    #####:  132:		if (strcmp(node->person.surname, surname) == 0 && strcmp(node->person.name, name) == 0) {
+    #####:  133:			int j = 0;
+    #####:  134:			while (newName[j] != '\0') {
+    #####:  135:				node->person.name[j] = newName[j];
+    #####:  136:				j++;
+        -:  137:			}
+    #####:  138:			node->person.name[j] = '\0';
+    #####:  139:			break;
+        -:  140:		}
+    #####:  141:		node = node->next;
+        -:  142:	}
+    #####:  143:}
+    #####:  144:void changeSurname(BaseWithStudents* base, char name[50], char surname[50], char newSurname[50]) {
+    #####:  145:	assert(base != NULL);
+    #####:  146:	Node* node = base->head;
+    #####:  147:	while (node != NULL) {
+    #####:  148:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname,surname) == 0) {
+    #####:  149:			int j = 0;
+    #####:  150:			while (newSurname[j] != '\0') {
+    #####:  151:				node->person.surname[j] = newSurname[j];
+    #####:  152:				j++;
+        -:  153:			}
+    #####:  154:			node->person.surname[j] = '\0';
+    #####:  155:			break;
+        -:  156:		}
+    #####:  157:		node = node->next;
+        -:  158:	}
+    #####:  159:}
+        1:  160:void setSocialAllowance(BaseWithStudents* base, char name[50], char surname[50]) {
+        1:  161:	assert(base != NULL);
+        1:  162:	Node* node = base->head;
+       29:  163:	while (node != NULL) {
+       28:  164:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        1:  165:			node->person.socialAllowance = 1;
+        1:  166:			setScholarShip(&node->person);
+        1:  167:			break;
+        -:  168:		}
+       27:  169:		node = node->next;
+        -:  170:	}
+        1:  171:}
+        1:  172:void addPetitions(BaseWithStudents* base, char name[50], char surname[50], int num){
+        1:  173:	assert(base != NULL);
+        1:  174:	Node* node = base->head;
+       29:  175:	while (node != NULL) {
+       28:  176:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        1:  177:			node->person.anyPetitions += num;
+        1:  178:			setScholarShip(&node->person);
+        1:  179:			break;
+        -:  180:		}
+       27:  181:		node = node->next;
+        -:  182:	}
+        1:  183:}
+        1:  184:void printStatement(BaseWithStudents* base) {
+        1:  185:	assert(base != NULL);
+        1:  186:	double allSum = 0;
+        1:  187:	Node* node = base->head;
+        1:  188:	int i = 0;
+       31:  189:	while (i++ < base->size) {
+       29:  190:		printf("{%d}", i);
+       29:  191:		printf("Name: %s %s\n", node->person.surname, node->person.name);
+       29:  192:		printf("ScholarShip: %lf\n", node->person.scholarship);
+       29:  193:		printf("Average score: %lf\n", node->person.averageScore);
+       29:  194:		printf("Social allowance: %d\n", node->person.socialAllowance);
+       29:  195:		printf("Number of petitions: %d\n", node->person.anyPetitions);
+       29:  196:		if(node->next != NULL)node = node->next;
+       29:  197:		allSum += node->person.scholarship;
+        -:  198:	}
+        1:  199:	printf("Total sum: %lf\n", allSum);
+        1:  200:}
+        -:  201:
+        -:  202:void showMenu(BaseWithStudents* base) {
+        -:  203:	assert(base != NULL);
+        -:  204:	printf("Print 1 to add student to base\n");
+        -:  205:	printf("Print 2 to delete student from base\n");
+        -:  206:	printf("Print 3 to change student's name\n");
+        -:  207:	printf("Print 4 to change student's surname\n");
+        -:  208:	printf("Print 5 to change average score\n");
+        -:  209:	printf("Print 6 to add social allowance\n");
+        -:  210:	printf("Print 7 to add petitions\n");
+        -:  211:	printf("Print 8 to dump the database\n");
+        -:  212:	printf("Print 9 show all database\n");
+        -:  213:	printf("Print other keys if you want to eixt\n");
+        -:  214:	Student* alice = (Student*)malloc(sizeof(Student));
+        -:  215:	assert(alice != NULL);
+        -:  216:	char name[50];
+        -:  217:	char surname[50];
+        -:  218:	switch (getchar()) {
+        -:  219:	case '1':
+        -:  220:		printf("Enter name and surname\n");
+        -:  221:		assert(scanf("%s %s",alice->name, alice->surname) == 2);
+        -:  222:		printf("Enter average score\n");
+        -:  223:		assert(scanf("%lf", &alice->averageScore) == 1);
+        -:  224:		printf("Enter social allowance\n");
+        -:  225:		assert(scanf("%d", &alice->socialAllowance) == 1);
+        -:  226:		printf("Enter petition's number\n");
+        -:  227:		assert(scanf("%d", &alice->anyPetitions) == 1);
+        -:  228:		setScholarShip(alice);
+        -:  229:		addStudent(base, alice);
+        -:  230:		break;
+        -:  231:	case '2':
+        -:  232:		printf("Enter surname and name\n");
+        -:  233:		assert(scanf("%s %s", surname, name) == 2);
+        -:  234:		delStudent(base, name, surname);
+        -:  235:		break;
+        -:  236:	case '3':
+        -:  237:		printf("Enter surname and name\n");
+        -:  238:		assert(scanf("%s %s", surname, name) == 2);
+        -:  239:		printf("Enter new name\n");
+        -:  240:		assert(scanf("%s", alice->name) == 1);
+        -:  241:		changeName(base, name, surname, alice->name);
+        -:  242:		break;
+        -:  243:	case '4':
+        -:  244:		printf("Enter surname and name\n");
+        -:  245:		assert(scanf("%s %s", surname, name) == 2);
+        -:  246:		printf("Enter new surname\n");
+        -:  247:		assert(scanf("%s", alice->surname) == 1);
+        -:  248:		changeSurname(base, name, surname, alice->surname);
+        -:  249:		break;
+        -:  250:	case '5':
+        -:  251:		printf("Enter surname and name\n");
+        -:  252:		assert(scanf("%s %s", surname, name) == 2);
+        -:  253:		printf("Enter new average score\n");
+        -:  254:		assert(scanf("%lf", &alice->averageScore) == 1);
+        -:  255:		changeAverageScore(base, name, surname, alice->averageScore);
+        -:  256:		break;
+        -:  257:	case '6':
+        -:  258:		printf("Enter surname and name\n");
+        -:  259:		assert(scanf("%s %s", surname, name) == 2);
+        -:  260:		printf("Enter social allowance\n");
+        -:  261:		assert(scanf("%d", &alice->socialAllowance) == 1);
+        -:  262:		setSocialAllowance(base, name, surname);
+        -:  263:		break;
+        -:  264:	case '7':
+        -:  265:		printf("Enter surname and name\n");
+        -:  266:		assert(scanf("%s %s", surname, name) == 2);
+        -:  267:		printf("Enter petition's number\n");
+        -:  268:		assert(scanf("%d", &alice->anyPetitions) == 1);
+        -:  269:		addPetitions(base, name, surname, alice->anyPetitions);
+        -:  270:		break;
+        -:  271:	case '8':
+        -:  272:		printStatement(base);
+        -:  273:		break;
+        -:  274:	case '9':
+        -:  275:		showAllBase(base);
+        -:  276:		break;
+        -:  277:	default:
+        -:  278:		exit(0);
+        -:  279:		deleteBase(base);
+        -:  280:	}
+        -:  281:	getchar();
+        -:  282:	free(alice);
+        -:  283:}
+        2:  284:void BaseInFile(BaseWithStudents* base, char fileName[11]) {
+        2:  285:	assert(base != NULL);
+        2:  286:	double allSum = 0;
+        2:  287:	Node* node = base->head;
+        2:  288:	int i = 0;
+        2:  289:	FILE* file = fopen(fileName,"w");
+        2:  290:	assert(file != NULL);
+       60:  291:	while (node != NULL) {
+       56:  292:		fprintf(file, "Name: %s %s\n", node->person.surname, node->person.name);
+       56:  293:		fprintf(file, "ScholarShip: %lf\n", node->person.scholarship);
+       56:  294:		fprintf(file, "Average score: %lf\n", node->person.averageScore);
+       56:  295:		fprintf(file, "Social allowance: %d\n", node->person.socialAllowance);
+       56:  296:		fprintf(file, "Number of petitions: %d\n", node->person.anyPetitions);
+       56:  297:		allSum += node->person.scholarship;
+       56:  298:		node = node->next;
+        -:  299:	}
+        2:  300:	fprintf(file, "Total sum: %lf", allSum);
+        2:  301:	fclose(file);
+        2:  302:}
+        -:  303:int main() {
+        1:  304:	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
+        1:  305:	base->head = base->tail = NULL;
+        1:  306:	base->size = 0;
+        1:  307:	
+        1:  308:	readBaseFromFile(base);
+        1:  309:
+        1:  310:	while (1) {
+        1:  311:		showMenu(base);
+        1:  312:	}
+        1:  313:
+        1:  314:	deleteBase(base);
+        1:  315:
+        1:  316:	return 0;
+        1:  317:}
+        1:  318:/*EOF*/
+        1:  319:/*EOF*/
+        1:  320:/*EOF*/
+        1:  321:/*EOF*/
+        1:  322:/*EOF*/
+        1:  323:/*EOF*/
+        1:  324:/*EOF*/
+        1:  325:/*EOF*/
+        1:  326:/*EOF*/
+        1:  327:/*EOF*/
+        1:  328:/*EOF*/
+        -:  329:/*EOF*/
+     3095:  330:/*EOF*/
+     3093:  331:/*EOF*/
+     3093:  332:/*EOF*/
+        -:  333:/*EOF*/
+        -:  334:/*EOF*/
+        1:  335:/*EOF*/
+        1:  336:/*EOF*/
+        1:  337:/*EOF*/
+        1:  338:/*EOF*/
+        1:  339:/*EOF*/
+        1:  340:/*EOF*/
+        1:  341:/*EOF*/
+        1:  342:/*EOF*/
+        1:  343:/*EOF*/
+        1:  344:/*EOF*/
+        1:  345:/*EOF*/
+        1:  346:/*EOF*/
+        1:  347:/*EOF*/
+        1:  348:/*EOF*/
+        1:  349:/*EOF*/
+        1:  350:/*EOF*/
+        -:  351:/*EOF*/
+        1:  352:/*EOF*/
+        1:  353:/*EOF*/
+        1:  354:/*EOF*/
+        -:  355:/*EOF*/
+     3319:  356:/*EOF*/
+     3317:  357:/*EOF*/
+     3317:  358:/*EOF*/
+        -:  359:/*EOF*/
+        -:  360:/*EOF*/
+        1:  361:/*EOF*/
+        1:  362:/*EOF*/
+        1:  363:/*EOF*/
+        1:  364:/*EOF*/
+        -:  365:/*EOF*/
+        -:  366:/*EOF*/
+        -:  367:/*EOF*/
+        -:  368:/*EOF*/
+        -:  369:/*EOF*/
+        -:  370:/*EOF*/
+        -:  371:/*EOF*/
+        -:  372:/*EOF*/
+        -:  373:/*EOF*/
+        1:  374:/*EOF*/
+        1:  375:/*EOF*/
+        -:  376:/*EOF*/
+        -:  377:/*EOF*/
+        1:  378:/*EOF*/
