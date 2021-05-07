@@ -4,6 +4,7 @@
 #include <string.h>
 
 void test(char fileName[11]) {
+	printf("\n\nTEST0\n\n");
 	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
 	assert(base != NULL);
 	base->head = base->tail = NULL;
@@ -25,8 +26,8 @@ void test(char fileName[11]) {
 	//showAllBase(base);
 	delStudent(base, "Zak", "Michell");
 	BaseInFile(base, "output.txt");
-	FILE* file0 = fopen("output.txt", "r");
-	FILE* file1= fopen("output.txt", "r");
+	FILE* file0 = fopen("output.txt", "rb");
+	FILE* file1= fopen("output.txt", "rb");
 	assert(file0 != NULL && file1 != NULL);
 	char ch, ch1;
 	while (feof(file0) == 0 && feof(file1) == 0){
@@ -39,6 +40,7 @@ void test(char fileName[11]) {
 	fclose(file1);
 }
 void test1(char fileName[12]) {
+	printf("\n\nTEST1\n\n");
 	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
 	assert(base != NULL);
 	base->head = base->tail = NULL;
@@ -51,8 +53,8 @@ void test1(char fileName[12]) {
 	BaseInFile(base, "outpu1.txt");
 	deleteBase(base);
 	printf("\n\n\nStart compare\n\n\n");
-	FILE* file0 = fopen(fileName, "r");
-	FILE* file1 = fopen("outpu1.txt", "r");
+	FILE* file0 = fopen(fileName, "rb");
+	FILE* file1 = fopen("outpu1.txt", "rb");
 	assert(file0 != NULL && file1 != NULL);
 	char ch, ch1;
 	while (feof(file0) == 0 && feof(file1) == 0) {
