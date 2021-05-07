@@ -25,7 +25,7 @@ void test(char fileName[11]) {
 	showAllBase(base);
 	delStudent(base, "Zak", "Michell");
 	BaseInFile(base, "output.txt");
-	FILE* file0 = fopen(fileName, "r");
+	FILE* file0 = fopen("output.txt", "r");
 	FILE* file1= fopen("output.txt", "r");
 	assert(file0 != NULL && file1 != NULL);
 	char ch, ch1;
@@ -51,7 +51,7 @@ void test1(char fileName[12]) {
 	BaseInFile(base, "outpu1.txt");
 	deleteBase(base);
 
-	FILE* file0 = fopen(fileName, "r");
+	FILE* file0 = fopen("outpu1.txt", "r");
 	FILE* file1 = fopen("outpu1.txt", "r");
 	assert(file0 != NULL && file1 != NULL);
 	char ch, ch1;
