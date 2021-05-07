@@ -23,7 +23,5 @@ jobs:
       run: make -C Lab4C/Lab4C/Lab4C/
     - name: make5
       run: make -C Lab5C/Lab5C/
-    - name: make6
-      run: make -C Lab6C/Lab6C/
     - name: make7
       run: make -C Lab7C/Lab7C/
