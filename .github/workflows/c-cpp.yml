@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#     - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - name: make
+      run: make -C Lab7C/Lab7C/
 #     - name: make2
 #       run: make -C LabC2/Project6С/
 #     - name: make1
@@ -23,5 +25,4 @@ jobs:
 #       run: make -C Lab4C/Lab4C/Lab4C/
 #     - name: make5
 #       run: make -C Lab5C/Lab5C/
-    - name: make7
-      run: make -C Lab7C/Lab7C/
+
