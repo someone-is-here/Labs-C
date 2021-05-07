@@ -7,26 +7,17 @@ typedef struct student {
 	char name[50];
 	char surname[50];
 	double averageScore;
-	//стипендия
 	double scholarship;
-	//only 1-yes; 0-no;
-	//льготы
 	int socialAllowance;
-	//ходатайства
 	int anyPetitions;
 } Student;
-
-//typedef struct baseWithStudents {
-//	Student* students;
-//	int numberOfStudents;
-//	int capacity;
-//} BaseWithStudents;
 
 typedef struct node {
 	Student person;
 	struct node* next;
 	struct node* prev;
 }Node;
+
 typedef struct baseWithStudents {
 	struct node* head;
 	struct node* tail;
