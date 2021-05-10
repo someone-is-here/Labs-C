@@ -8,7 +8,7 @@ jobs:
         uses: actions/checkout@master
       - name: Test
         run: |
-          gcc -o -C Lab7C/Lab7C/Source.c -lm
+          make -C Lab7C/Lab7C/
           gcc -ftest-coverage -fprofile-arcs -O0 -o test -C Lab7C/Lab7C/Test.c -C Lab7C/Lab7C/Source.c -Dmain=_main -lm
           ./test
           gcov -abcfu -C Lab7C/Lab7C/Source.c
