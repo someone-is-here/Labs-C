@@ -12,5 +12,5 @@ jobs:
       - name: Upload
         uses: codecov/codecov-action@v1
         with:
-          files: |
+          files: 
               -C Lab7C/Lab7C/Source.c.gcov
