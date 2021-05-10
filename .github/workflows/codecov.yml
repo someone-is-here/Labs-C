@@ -16,4 +16,4 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           files: |
-              -C ./Lab7C/Lab7C/Source.c.gcov
+              -C /Lab7C/Lab7C/Source.c.gcov
