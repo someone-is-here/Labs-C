@@ -70,7 +70,7 @@ void deleteBase(BaseWithStudents* base) {
 }
 void readBaseFromFile(BaseWithStudents* base) {
 	assert(base != NULL);
-    FILE* fin = fopen("base.txt","r"); 
+        FILE* fin = fopen("base.txt","r"); 
 	assert(fin != NULL);
 	int num = 0;
 	double allSum;
