@@ -1,0 +1,321 @@
+        -:    0:Source:Source.c
+        -:    0:Graph:Source.gcno
+        -:    0:Data:Source.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#define _CRT_SECURE_NO_WARNINGS
+        -:    2:#include "Header.h"
+        -:    3:#include <stdio.h>
+        -:    4:#include <assert.h>
+        -:    5:#include <locale.h>
+        -:    6:#include <string.h>
+        -:    7:
+       57:    8:void addStudent(BaseWithStudents* base, Student* stud) {
+       57:    9:	assert(stud != NULL);
+       57:   10:	Node* node = (Node*) malloc (sizeof(Node));
+       57:   11:	node->next = NULL;
+       57:   12:	node->prev = NULL;
+       57:   13:	node->person = *stud;
+       57:   14:	if (base->head == NULL) {
+        2:   15:		base->head = base->tail = node;
+        2:   16:		base->size++;
+        -:   17:	}
+        -:   18:	else{
+       55:   19:		base->tail->next = node;
+       55:   20:		node->prev = base->tail;
+       55:   21:		base->tail = node;
+       55:   22:		base->size++;
+        -:   23:	}
+       57:   24:}
+        3:   25:void delStudent(BaseWithStudents* base, char name[50], char surname[50]) {
+        3:   26:	assert(base != NULL);
+        3:   27:	Node* node = base->head;
+       87:   28:	while (node != NULL) {
+       83:   29:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        2:   30:			if (node->next != NULL) {
+    #####:   31:				node->next->prev = node->prev;
+        -:   32:			}
+        -:   33:			else {
+        2:   34:				base->tail = node->prev;
+        -:   35:			}
+        2:   36:			if (node->prev != NULL) {
+        2:   37:				node->prev->next = node->next;
+        -:   38:			}
+        -:   39:			else {
+    #####:   40:				base->head = node->next;
+        -:   41:			}
+        2:   42:			base->size--;
+        2:   43:			break;
+        -:   44:		}
+       81:   45:		node = node->next;
+        -:   46:	}
+        3:   47:}
+        1:   48:void showAllBase(BaseWithStudents* base) {
+        1:   49:	assert(base != NULL);
+        1:   50:	Node* node = base->head;
+       29:   51:	for (int i = 0; i < base->size; i++) {
+        -:   52:		//printf("{%d}", i);
+       28:   53:		printf("Name: %s %s\n", node->person.surname, node->person.name);
+       28:   54:		printf("ScholarShip: %lf\n", node->person.scholarship);
+       28:   55:		printf("Average score: %lf\n", node->person.averageScore);
+       28:   56:		printf("Social allowance: %d\n", node->person.socialAllowance);
+       28:   57:		printf("Number of petitions: %d\n", node->person.anyPetitions);
+       28:   58:		node = node->next;
+        -:   59:	}
+        1:   60:}
+        2:   61:void deleteBase(BaseWithStudents* base) {
+        2:   62:	assert(base != NULL);
+        2:   63:	Node* node = base->head;
+       57:   64:	while (node->next != NULL){
+       53:   65:		node = node->next;
+       53:   66:		free(node->prev);
+        -:   67:	}
+        2:   68:	free(node);
+        2:   69:	base = NULL;
+        2:   70:}
+        2:   71:void readBaseFromFile(BaseWithStudents* base) {
+        2:   72:	assert(base != NULL);
+        2:   73:    FILE* fin = fopen("base.txt","r"); 
+        2:   74:	assert(fin != NULL);
+        2:   75:	int num = 0;
+        -:   76:	double allSum;
+       59:   77:	while (fscanf(fin, "Total sum: %lf\n", &allSum) != 1) {
+       55:   78:		Student* stud = (Student*)malloc(sizeof(Student));
+       55:   79:		assert(stud != NULL);
+       55:   80:		assert(fscanf(fin, "Name: %s %s\n", stud->surname, stud->name) == 2);
+       55:   81:		assert(fscanf(fin, "ScholarShip: %lf\n", &stud->scholarship) == 1);
+       55:   82:		assert(fscanf(fin, "Average score: %lf\n", &stud->averageScore) == 1);
+       55:   83:		assert(fscanf(fin, "Social allowance: %d\n", &stud->socialAllowance) == 1);
+       55:   84:		assert(fscanf(fin, "Number of petitions: %d\n", &stud->anyPetitions) == 1);
+       55:   85:		setScholarShip(stud);
+       55:   86:		addStudent(base, stud);
+       55:   87:		num++;
+        -:   88:	}
+        -:   89:
+        2:   90:	fclose(fin);
+        2:   91:}
+       59:   92:void setScholarShip(Student* stud) {
+       59:   93:	assert(stud != NULL);
+       59:   94:	stud->scholarship = 0;
+       59:   95:	if (stud->socialAllowance == 1) {
+       11:   96:		stud->scholarship = 135.000;
+        -:   97:	}
+       59:   98:	if (stud->anyPetitions) {
+        8:   99:		stud->scholarship = 181.000;
+        -:  100:	}
+        -:  101:	else {
+       51:  102:		if (stud->averageScore >= 5 && stud->averageScore < 6) {
+        1:  103:			stud->scholarship = 78.862;
+        -:  104:		}
+       50:  105:		else if (stud->averageScore >= 6 && stud->averageScore < 8) {
+        4:  106:			stud->scholarship = 94.634;
+        -:  107:		}
+       46:  108:		else if (stud->averageScore >= 8 && stud->averageScore < 9) {
+        2:  109:			stud->scholarship = 110.405;
+        -:  110:		}
+       44:  111:		else if (stud->averageScore >= 9 && stud->averageScore <= 10) {
+       44:  112:			stud->scholarship = 126.179;
+        -:  113:		}
+        -:  114:	}
+       59:  115:}
+        -:  116:
+        1:  117:void changeAverageScore(BaseWithStudents* base, char name[50], char surname[50], double newAverageScore) {
+        1:  118:	assert(base != NULL);
+        1:  119:	assert(newAverageScore >= 0 && newAverageScore <= 10.0);
+        1:  120:	Node* node = base->head;
+       29:  121:	while (node != NULL) {
+       28:  122:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        1:  123:			node->person.averageScore = newAverageScore;
+        1:  124:			setScholarShip(&node->person);
+        1:  125:			break;
+        -:  126:		}		
+       27:  127:		node = node->next;
+        -:  128:	}
+        1:  129:}
+    #####:  130:void changeName(BaseWithStudents* base, char name[50], char surname[50], char newName[50]) {
+    #####:  131:	assert(base != NULL);
+    #####:  132:	Node* node = base->head;
+    #####:  133:	while (node != NULL) {
+    #####:  134:		if (strcmp(node->person.surname, surname) == 0 && strcmp(node->person.name, name) == 0) {
+    #####:  135:			int j = 0;
+    #####:  136:			while (newName[j] != '\0') {
+    #####:  137:				node->person.name[j] = newName[j];
+    #####:  138:				j++;
+        -:  139:			}
+    #####:  140:			node->person.name[j] = '\0';
+    #####:  141:			break;
+        -:  142:		}
+    #####:  143:		node = node->next;
+        -:  144:	}
+    #####:  145:}
+    #####:  146:void changeSurname(BaseWithStudents* base, char name[50], char surname[50], char newSurname[50]) {
+    #####:  147:	assert(base != NULL);
+    #####:  148:	Node* node = base->head;
+    #####:  149:	while (node != NULL) {
+    #####:  150:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname,surname) == 0) {
+    #####:  151:			int j = 0;
+    #####:  152:			while (newSurname[j] != '\0') {
+    #####:  153:				node->person.surname[j] = newSurname[j];
+    #####:  154:				j++;
+        -:  155:			}
+    #####:  156:			node->person.surname[j] = '\0';
+    #####:  157:			break;
+        -:  158:		}
+    #####:  159:		node = node->next;
+        -:  160:	}
+    #####:  161:}
+        1:  162:void setSocialAllowance(BaseWithStudents* base, char name[50], char surname[50]) {
+        1:  163:	assert(base != NULL);
+        1:  164:	Node* node = base->head;
+       29:  165:	while (node != NULL) {
+       28:  166:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        1:  167:			node->person.socialAllowance = 1;
+        1:  168:			setScholarShip(&node->person);
+        1:  169:			break;
+        -:  170:		}
+       27:  171:		node = node->next;
+        -:  172:	}
+        1:  173:}
+        1:  174:void addPetitions(BaseWithStudents* base, char name[50], char surname[50], int num){
+        1:  175:	assert(base != NULL);
+        1:  176:	Node* node = base->head;
+       29:  177:	while (node != NULL) {
+       28:  178:		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
+        1:  179:			node->person.anyPetitions += num;
+        1:  180:			setScholarShip(&node->person);
+        1:  181:			break;
+        -:  182:		}
+       27:  183:		node = node->next;
+        -:  184:	}
+        1:  185:}
+        1:  186:void printStatement(BaseWithStudents* base) {
+        1:  187:	assert(base != NULL);
+        1:  188:	double allSum = 0;
+        1:  189:	Node* node = base->head;
+        1:  190:	int i = 0;
+       30:  191:	while (i++ < base->size) {
+        -:  192:		//printf("{%d}", i);
+       28:  193:		printf("Name: %s %s\n", node->person.surname, node->person.name);
+       28:  194:		printf("ScholarShip: %lf\n", node->person.scholarship);
+       28:  195:		printf("Average score: %lf\n", node->person.averageScore);
+       28:  196:		printf("Social allowance: %d\n", node->person.socialAllowance);
+       28:  197:		printf("Number of petitions: %d\n", node->person.anyPetitions);
+       28:  198:		if(node->next != NULL)node = node->next;
+       28:  199:		allSum += node->person.scholarship;
+        -:  200:	}
+        1:  201:	printf("Total sum: %lf\n", allSum);
+        1:  202:}
+        -:  203:
+        1:  204:void showMenu() {
+        1:  205:	printf("Print 1 to add student to base\n");
+        1:  206:	printf("Print 2 to delete student from base\n");
+        1:  207:	printf("Print 3 to change student's name\n");
+        1:  208:	printf("Print 4 to change student's surname\n");
+        1:  209:	printf("Print 5 to change average score\n");
+        1:  210:	printf("Print 6 to add social allowance\n");
+        1:  211:	printf("Print 7 to add petitions\n");
+        1:  212:	printf("Print 8 to dump the database\n");
+        1:  213:	printf("Print 9 show all database\n");
+        1:  214:	printf("Print other keys if you want to eixt\n");
+        1:  215:}
+        2:  216:void baseInFile(BaseWithStudents* base) {
+        2:  217:	assert(base != NULL);
+        2:  218:	double allSum = 0;
+        2:  219:	Node* node = base->head;
+        2:  220:	int i = 0;
+        2:  221:	FILE* file = fopen("base.txt","w");
+        2:  222:	assert(file != NULL);
+       59:  223:	while (node != NULL) {
+       55:  224:		fprintf(file, "Name: %s %s\n", node->person.surname, node->person.name);
+       55:  225:		fprintf(file, "ScholarShip: %lf\n", node->person.scholarship);
+       55:  226:		fprintf(file, "Average score: %lf\n", node->person.averageScore);
+       55:  227:		fprintf(file, "Social allowance: %d\n", node->person.socialAllowance);
+       55:  228:		fprintf(file, "Number of petitions: %d\n", node->person.anyPetitions);
+       55:  229:		allSum += node->person.scholarship;
+       55:  230:		node = node->next;
+        -:  231:	}
+        2:  232:	fprintf(file, "Total sum: %lf", allSum);
+        2:  233:	fclose(file);
+        2:  234:}
+        -:  235:
+        1:  236:void test(char fileName[11]) {
+        1:  237:	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
+        1:  238:	assert(base != NULL);
+        1:  239:	base->head = base->tail = NULL;
+        1:  240:	base->size = 0;
+        1:  241:	readBaseFromFile(base);
+        1:  242:	delStudent(base, "Tatiana", "Shurko");
+        1:  243:	delStudent(base, "Dmitry", "Akinshev");
+        1:  244:	Student* stud = (Student*)malloc(sizeof(Student));
+        1:  245:	assert(stud != NULL);
+        1:  246:	stud->anyPetitions = 0;
+        1:  247:	stud->averageScore = 5.6;
+        1:  248:	stud->socialAllowance = 1;
+        1:  249:	char name[50] = "Zak";
+        1:  250:	char surname[50] = "Michell";
+        1:  251:	strcpy(stud->name, name);
+        1:  252:	strcpy(stud->surname, surname);
+        1:  253:	setScholarShip(stud);
+        1:  254:	addStudent(base, stud);
+        1:  255:	showAllBase(base);
+        1:  256:	delStudent(base, "Zak", "Michell");
+        1:  257:	baseInFile(base);
+        1:  258:	deleteBase(base);
+        -:  259:
+        1:  260:	FILE* file0 = fopen(fileName, "r");
+        1:  261:	FILE* file1 = fopen("base.txt", "r");
+        1:  262:	assert(file0 != NULL && file1 != NULL);
+        -:  263:	char str1[50];
+        -:  264:	char str2[50];
+      410:  265:	while (feof(file0) == 0 && feof(file1) == 0) {
+      408:  266:		if (fscanf(file0, "%s", str1) && fscanf(file1, "%s", str2)) {
+      408:  267:			assert(strcmp(str1, str2) == 0);
+        -:  268:		}
+        -:  269:	}
+        1:  270:	fclose(file0);
+        1:  271:	fclose(file1);
+        1:  272:}
+        1:  273:void test1(char fileName[12]) {
+        1:  274:	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
+        1:  275:	assert(base != NULL);
+        1:  276:	base->head = base->tail = NULL;
+        1:  277:	base->size = 0;
+        1:  278:	readBaseFromFile(base);
+        1:  279:	Student* stud = (Student*)malloc(sizeof(Student));
+        1:  280:	assert(stud != NULL);
+        1:  281:	stud->anyPetitions = 2;
+        1:  282:	stud->averageScore = 9.6;
+        1:  283:	stud->socialAllowance = 1;
+        1:  284:	char name[50] = "Tatiana";
+        1:  285:	char surname[50] = "Shurko";
+        1:  286:	strcpy(stud->name, name);
+        1:  287:	strcpy(stud->surname, surname);
+        1:  288:	addStudent(base, stud);
+        1:  289:	setSocialAllowance(base, "Tatiana", "Shurko");
+        1:  290:	addPetitions(base, "Tatiana", "Shurko", 5);
+        1:  291:	changeAverageScore(base, "Tatiana", "Shurko", 8.7876);
+        1:  292:	printStatement(base);
+        1:  293:	baseInFile(base);
+        1:  294:	showMenu();
+        1:  295:	deleteBase(base);
+        -:  296:
+        1:  297:	FILE* file0 = fopen(fileName, "r");
+        1:  298:	FILE* file1 = fopen("base.txt", "r");
+        1:  299:	assert(file0 != NULL && file1 != NULL);
+        -:  300:	char str1[50];
+        -:  301:	char str2[50];
+      425:  302:	while (feof(file0) == 0 && feof(file1) == 0) {
+      423:  303:		if (fscanf(file0, "%s", str1) && fscanf(file1, "%s", str2)) {
+      423:  304:			assert(strcmp(str1, str2) == 0);
+        -:  305:		}
+        -:  306:	}
+        1:  307:	fclose(file0);
+        1:  308:	fclose(file1);
+        1:  309:}
+        -:  310:
+        1:  311:int main() {
+        1:  312:	test("result.txt");
+        1:  313:	test1("result1.txt");
+        -:  314:
+        1:  315:	return 0;
+        -:  316:}
