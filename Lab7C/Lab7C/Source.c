@@ -233,84 +233,87 @@ void baseInFile(BaseWithStudents* base) {
 	fclose(file);
 }
 
-void test(char fileName[11]) {
-	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
-	assert(base != NULL);
-	base->head = base->tail = NULL;
-	base->size = 0;
-	readBaseFromFile(base);
-	delStudent(base, "Tatiana", "Shurko");
-	delStudent(base, "Dmitry", "Akinshev");
-	Student* stud = (Student*)malloc(sizeof(Student));
-	assert(stud != NULL);
-	stud->anyPetitions = 0;
-	stud->averageScore = 5.6;
-	stud->socialAllowance = 1;
-	char name[50] = "Zak";
-	char surname[50] = "Michell";
-	strcpy(stud->name, name);
-	strcpy(stud->surname, surname);
-	setScholarShip(stud);
-	addStudent(base, stud);
-	showAllBase(base);
-	delStudent(base, "Zak", "Michell");
-	baseInFile(base);
-	deleteBase(base);
-
-	FILE* file0 = fopen(fileName, "r");
-	FILE* file1 = fopen("base.txt", "r");
-	assert(file0 != NULL && file1 != NULL);
-	char str1[50];
-	char str2[50];
-	while (feof(file0) == 0 && feof(file1) == 0) {
-		if (fscanf(file0, "%s", str1) && fscanf(file1, "%s", str2)) {
-			assert(strcmp(str1, str2) == 0);
-		}
-	}
-	fclose(file0);
-	fclose(file1);
-}
-void test1(char fileName[12]) {
-	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
-	assert(base != NULL);
-	base->head = base->tail = NULL;
-	base->size = 0;
-	readBaseFromFile(base);
-	Student* stud = (Student*)malloc(sizeof(Student));
-	assert(stud != NULL);
-	stud->anyPetitions = 2;
-	stud->averageScore = 9.6;
-	stud->socialAllowance = 1;
-	char name[50] = "Tatiana";
-	char surname[50] = "Shurko";
-	strcpy(stud->name, name);
-	strcpy(stud->surname, surname);
-	addStudent(base, stud);
-	setSocialAllowance(base, "Tatiana", "Shurko");
-	addPetitions(base, "Tatiana", "Shurko", 5);
-	changeAverageScore(base, "Tatiana", "Shurko", 8.7876);
-	printStatement(base);
-	baseInFile(base);
-	showMenu();
-	deleteBase(base);
-
-	FILE* file0 = fopen(fileName, "r");
-	FILE* file1 = fopen("base.txt", "r");
-	assert(file0 != NULL && file1 != NULL);
-	char str1[50];
-	char str2[50];
-	while (feof(file0) == 0 && feof(file1) == 0) {
-		if (fscanf(file0, "%s", str1) && fscanf(file1, "%s", str2)) {
-			assert(strcmp(str1, str2) == 0);
-		}
-	}
-	fclose(file0);
-	fclose(file1);
-}
-
 int main() {
-	test("result.txt");
-	test1("result1.txt");
+	BaseWithStudents* base = (BaseWithStudents*)malloc(sizeof(BaseWithStudents));
+	base->head = base->tail = NULL;
+	base->size = 0;
+	
+	readBaseFromFile(base);
+	Student* alice = (Student*)malloc(sizeof(Student));
+	assert(alice != NULL);
+	while (1) {
+		showMenu();
+		char name[50];
+		char surname[50];
+		switch (getchar()) {
+		case '1':
+			printf("Enter name and surname\n");
+			assert(scanf("%s %s", alice->name, alice->surname) == 2);
+			printf("Enter average score\n");
+			assert(scanf("%lf", &alice->averageScore) == 1);
+			printf("Enter social allowance\n");
+			assert(scanf("%d", &alice->socialAllowance) == 1);
+			printf("Enter petition's number\n");
+			assert(scanf("%d", &alice->anyPetitions) == 1);
+			setScholarShip(alice);
+			addStudent(base, alice);
+			break;
+		case '2':
+			printf("Enter surname and name\n");
+			assert(scanf("%s %s", surname, name) == 2);
+			delStudent(base, name, surname);
+			break;
+		case '3':
+			printf("Enter surname and name\n");
+			assert(scanf("%s %s", surname, name) == 2);
+			printf("Enter new name\n");
+			assert(scanf("%s", alice->name) == 1);
+			changeName(base, name, surname, alice->name);
+			break;
+		case '4':
+			printf("Enter surname and name\n");
+			assert(scanf("%s %s", surname, name) == 2);
+			printf("Enter new surname\n");
+			assert(scanf("%s", alice->surname) == 1);
+			changeSurname(base, name, surname, alice->surname);
+			break;
+		case '5':
+			printf("Enter surname and name\n");
+			assert(scanf("%s %s", surname, name) == 2);
+			printf("Enter new average score\n");
+			assert(scanf("%lf", &alice->averageScore) == 1);
+			changeAverageScore(base, name, surname, alice->averageScore);
+			break;
+		case '6':
+			printf("Enter surname and name\n");
+			assert(scanf("%s %s", surname, name) == 2);
+			printf("Enter social allowance\n");
+			assert(scanf("%d", &alice->socialAllowance) == 1);
+			setSocialAllowance(base, name, surname);
+			break;
+		case '7':
+			printf("Enter surname and name\n");
+			assert(scanf("%s %s", surname, name) == 2);
+			printf("Enter petition's number\n");
+			assert(scanf("%d", &alice->anyPetitions) == 1);
+			addPetitions(base, name, surname, alice->anyPetitions);
+			break;
+		case '8':
+			printStatement(base);
+			break;
+		case '9':
+			showAllBase(base);
+			break;
+		default:
+			baseInFile(base);
+			exit(0);
+			deleteBase(base);
+		}
+		getchar();
+		free(alice);
+	}
+
+	deleteBase(base);
 
 	return 0;
 }
