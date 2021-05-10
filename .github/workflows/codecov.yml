@@ -8,7 +8,7 @@ jobs:
         uses: actions/checkout@master
       - name: Test
         run: |
-          gcc -ftest-coverage -fprofile-arcs -O0 -o test -C Lab7C/Lab7C/Test.c -C Lab7C/Lab7C/Source.c
+          gcc -ftest-coverage -fprofile-arcs -O0 -o test -C Lab7C/Lab7C/Source.c -C Lab7C/Lab7C/Test.c 
           ./test
           gcov -abcfu -C Lab7C/Lab7C/Source.c
       - name: Upload
