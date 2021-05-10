@@ -10,8 +10,8 @@ jobs:
         run: |
           gcc -ftest-coverage -fprofile-arcs -O0 -o test -C Lab7C/Lab7C/Test.c -C Lab7C/Lab7C/Source.c
           ./test
-          gcov -abcfu -C Lab7C/Lab7C/Test.c
+          gcov -abcfu -C Lab7C/Lab7C/Source.c
       - name: Upload
         uses: codecov/codecov-action@v1
         with:
-          files: ./Test.c.gcov
+          files: ./Source.c.gcov
