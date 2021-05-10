@@ -8,10 +8,12 @@ jobs:
         uses: actions/checkout@master
       - name: Test
         run: |
-          gcc -ftest-coverage -fprofile-arcs -O0 -o test -C Lab7C/Lab7C/Source.c -C Lab7C/Lab7C/Test.c 
+          gcc -ftest-coverage -fprofile-arcs -O0 -o test -C Lab7C/Lab7C/Test.c -C Lab7C/Lab7C/Source.c -Dmain=_main
           ./test
           gcov -abcfu -C Lab7C/Lab7C/Source.c
       - name: Upload
         uses: codecov/codecov-action@v1
         with:
           files: ./Source.c.gcov
+          
+          name: Codecov
