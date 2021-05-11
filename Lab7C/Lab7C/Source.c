@@ -128,6 +128,7 @@ void changeAverageScore(BaseWithStudents* base, char name[50], char surname[50],
 	}
 }
 void changeName(BaseWithStudents* base, char name[50], char surname[50], char newName[50]) {
+	printf("\n\n ChangeName \n\n");
 	assert(base != NULL);
 	Node* node = base->head;
 	while (node != NULL) {
@@ -144,6 +145,7 @@ void changeName(BaseWithStudents* base, char name[50], char surname[50], char ne
 	}
 }
 void changeSurname(BaseWithStudents* base, char name[50], char surname[50], char newSurname[50]) {
+	printf("\n\n ChangeSurname \n\n");
 	assert(base != NULL);
 	Node* node = base->head;
 	while (node != NULL) {
