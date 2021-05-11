@@ -49,7 +49,6 @@ void showAllBase(BaseWithStudents* base) {
 	assert(base != NULL);
 	Node* node = base->head;
 	for (int i = 0; i < base->size; i++) {
-		//printf("{%d}", i);
 		printf("Name: %s %s\n", node->person.surname, node->person.name);
 		printf("ScholarShip: %lf\n", node->person.scholarship);
 		printf("Average score: %lf\n", node->person.averageScore);
@@ -119,7 +118,6 @@ void changeAverageScore(BaseWithStudents* base, char name[50], char surname[50],
 	assert(newAverageScore >= 0 && newAverageScore <= 10.0);
 	Node* node = base->head;
 	while (node != NULL) {
-		printf("%s  %s -----  %s %s\n",node->person.surname,surname,node->person.name, name);
 		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname, surname) == 0) {
 			node->person.averageScore = newAverageScore;
 			setScholarShip(&node->person);
@@ -133,7 +131,6 @@ void changeName(BaseWithStudents* base, char name[50], char surname[50], char ne
 	assert(base != NULL);
 	Node* node = base->head;
 	while (node != NULL) {
-		printf("%s  %s -----  %s %s\n",node->person.surname,surname,node->person.name, name);
 		printf("%d -----  %d\n",strcmp(node->person.surname, surname),strcmp(node->person.name, name));
 		if (strcmp(node->person.surname, surname) == 0 && strcmp(node->person.name, name) == 0) {
 			int j = 0;
@@ -152,6 +149,7 @@ void changeSurname(BaseWithStudents* base, char name[50], char surname[50], char
 	assert(base != NULL);
 	Node* node = base->head;
 	while (node != NULL) {
+		printf("%d -----  %d\n",strcmp(node->person.surname, surname),strcmp(node->person.name, name));
 		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname,surname) == 0) {
 			int j = 0;
 			while (newSurname[j] != '\0') {
