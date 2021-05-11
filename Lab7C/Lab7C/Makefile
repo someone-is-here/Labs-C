@@ -1,11 +1,15 @@
-all: createDir build test
+all: clean buildMain buildTest runTest
 
-createDir:
-	mkdir -p target
-build:
-	gcc --coverage -o test Test.c Source.c -Dmain=_main -lm
-	gcc -o target/Source Source.c -lm
-	gcov Source.c
-test:
-	gcc -o target/test Source.c Test.c -Dmain=_main -lm
-	./target/test
+buildMain:
+	mkdir -p target/test
+	gcc -o target/test/Source Test.c Source.c -Dmain=_main -lm
+
+buildTest:
+	gcc -ftest-coverage -fprofile-arcs -O0 -o test Source.c Test.c -Dmain=_main -lm
+
+runTest:
+	./test
+	gcov -abcfu Test.c
+
+clean:
+	rm -rf target
