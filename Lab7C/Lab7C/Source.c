@@ -134,6 +134,7 @@ void changeName(BaseWithStudents* base, char name[50], char surname[50], char ne
 	Node* node = base->head;
 	while (node != NULL) {
 		printf("%s  %s -----  %s %s\n",node->person.surname,surname,node->person.name, name);
+		printf("%d -----  %d\n",strcmp(node->person.surname, surname),strcmp(node->person.name, name));
 		if (strcmp(node->person.surname, surname) == 0 && strcmp(node->person.name, name) == 0) {
 			int j = 0;
 			while (newName[j] != '\0') {
