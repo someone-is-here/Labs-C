@@ -133,7 +133,7 @@ ScholarShip: 126.179000
 Average score: 10.000000
 Social allowance: 0
 Number of petitions: 0
-Name: Shurko Tatiana
+Name: Shurko Tanusha
 ScholarShip: 181.000000
 Average score: 8.787600
 Social allowance: 1
