@@ -60,7 +60,7 @@ void test1(char fileName[12]) {
 	addPetitions(base, "Tatiana", "Shurk", 5);
 	changeAverageScore(base, "Tatiana", "Shurk", 8.7876);
 	changeName(base, "Tatiana", "Shurk", "Tanusha");
-	changeSurname(base, "Tatiana", "Shurko", "Tanusha");
+	changeSurname(base, "Tanusha", "Shurk", "Shurko");
 	printStatement(base);
 	baseInFile(base);
 	showMenu();
