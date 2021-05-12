@@ -127,11 +127,13 @@ void changeAverageScore(BaseWithStudents* base, char name[50], char surname[50],
 	}
 }
 void changeName(BaseWithStudents* base, char name[50], char surname[50], char newName[50]) {
+	printf("\n\nChange name\n\n");
 	assert(base != NULL);
 	Node* node = base->head;
 	while (node != NULL) {
 		if (strcmp(node->person.surname, surname) == 0 && strcmp(node->person.name, name) == 0) {
 			int j = 0;
+			printf("\n\nFound\n\n");
 			while (newName[j] != '\0') {
 				node->person.name[j] = newName[j];
 				j++;
@@ -143,11 +145,13 @@ void changeName(BaseWithStudents* base, char name[50], char surname[50], char ne
 	}
 }
 void changeSurname(BaseWithStudents* base, char name[50], char surname[50], char newSurname[50]) {
+	printf("\n\nChange surname\n\n");
 	assert(base != NULL);
 	Node* node = base->head;
 	while (node != NULL) {
 		if (strcmp(node->person.name, name) == 0 && strcmp(node->person.surname,surname) == 0) {
 			int j = 0;
+			printf("\n\nFound\n\n");
 			while (newSurname[j] != '\0') {
 				node->person.surname[j] = newSurname[j];
 				j++;
