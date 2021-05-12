@@ -188,7 +188,6 @@ void printStatement(BaseWithStudents* base) {
 	Node* node = base->head;
 	int i = 0;
 	while (i++ < base->size) {
-		//printf("{%d}", i);
 		printf("Name: %s %s\n", node->person.surname, node->person.name);
 		printf("ScholarShip: %lf\n", node->person.scholarship);
 		printf("Average score: %lf\n", node->person.averageScore);
