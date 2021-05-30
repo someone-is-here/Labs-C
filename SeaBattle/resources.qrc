@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/exit.png</file>
+        <file>img/images.png</file>
+        <file>img/start.jpg</file>
+        <file>img/del.png</file>
+        <file>img/default.jpg</file>
+        <file>img/1.mp3</file>
+        <file>img/icon.jpg</file>
+        <file>img/noShip.png</file>
+        <file>img/nothing.jpg</file>
+        <file>img/sea1.jpg</file>
+        <file>img/ship.png</file>
+        <file>img/icon1.png</file>
+        <file>img/2.mp3</file>
+    </qresource>
+</RCC>
