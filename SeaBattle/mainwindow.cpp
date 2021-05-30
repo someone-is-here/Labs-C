@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QPushButton>
 #include <QSize>
-#include <QDebug>
 #include <QString>
 #include <QLabel>
 #include <QGraphicsDropShadowEffect>
@@ -292,9 +291,11 @@ void MainWindow::ChangeButtonClicked() {
     if (!listWithShipsOponents.size()) {
         GameResult();
     }
-    if (!visited[listOpponents.indexOf(button)]) {
-        Processing(listWithPairsOpponents, listOpponents, listWithShipsOponents, helpForRemovingOpponetents, button, false);
-        if (!move)ButtonClicked();
+    else {
+        if (!visited[listOpponents.indexOf(button)]) {
+            Processing(listWithPairsOpponents, listOpponents, listWithShipsOponents, helpForRemovingOpponetents, button, false);
+            if (!move)ButtonClicked();
+        }
     }
 }
 void MainWindow::GameResult(bool isWin) {
@@ -309,6 +310,19 @@ void MainWindow::GameResult(bool isWin) {
     QMessageBox msgBox;
     msgBox.setGeometry(this->width() / 2, this->height() / 2, 100, 100);
     if (isWin) {
+        QMovie* movie = new QMovie("D:\\QT\\Projects\\SeaBattle\\0.gif");
+        QLabel* processLabel = new QLabel(tr(""), this);
+        processLabel->setGeometry(this->width() / 3, 0, this->width(), this->height());
+        processLabel->setMovie(movie);
+
+        movie->start();
+        processLabel->show();
+
+        QTest::qWait(5000);
+
+        movie->stop();
+        processLabel->clear();
+
         msgBox.setText("You win the game!");
     }
     else {
@@ -345,7 +359,6 @@ void MainWindow::Processing(QList<QPair<int, QList<QPushButton*>>>& listWithPair
         QIcon buttonIconShip(pixmap2);
 
         QList<QPushButton*> listHelpForRemoving;
-
         if (listWithShips.contains(button)) {
             if (helpForRemoving.contains(button)) {
                 for (int i = 0; i < listWithPairs.size(); i++) {
@@ -354,9 +367,11 @@ void MainWindow::Processing(QList<QPair<int, QList<QPushButton*>>>& listWithPair
                         if (setMove && injured) {
                             int statBut = moves[moves.size() - 1];
                             int diff = statBut - list.indexOf(button);
-                            if (!moves.isEmpty() && !injured) moves.clear();
                             if (diff != 0) {
                                 bool flag1 = true, flag2 = true;
+                                if (!moves.isEmpty() && injured == 1) {
+                                    moves.clear();
+                                }
                                 for (int k = 1; k < fieldSize / 2; k++) {
                                     if (statBut + diff * k >= 0 && statBut + diff * k < fieldSize * fieldSize) {
                                         if (!field.contains(statBut + diff * k) && flag1) flag1 = false;
@@ -368,7 +383,7 @@ void MainWindow::Processing(QList<QPair<int, QList<QPushButton*>>>& listWithPair
                                     }
                                 }
                                 moves.push_front(list.indexOf(button));
-                                injured = false;
+                                injured--;
                             }
                         }
                         break;
@@ -421,12 +436,17 @@ void MainWindow::Processing(QList<QPair<int, QList<QPushButton*>>>& listWithPair
                         if (list.indexOf(button) - 1 >= 0 && field.contains(list.indexOf(button) - 1))moves.push_back(list.indexOf(button) - 1);
                         if (list.indexOf(button) + 10 < list.size() && field.contains(list.indexOf(button) + 10))moves.push_back(list.indexOf(button) + 10);
                         if (list.indexOf(button) - 10 >= 0 && field.contains(list.indexOf(button) - 10)) moves.push_back(list.indexOf(button) - 10);
+                        int position = rand() % 4;
+                        int save = moves[position];
+                        moves.removeAt(position);
+                        moves.push_back(save);
+
                         moves.push_back(list.indexOf(button));
                         pos = list.indexOf(button);
                     }
                     listWithPairs.append(QPair<int, QList<QPushButton*>>(counter, listHelpForRemoving));
                     listHelpForRemoving.clear();
-                    if (setMove)injured = true;
+                    if (setMove) injured++;
                 }
             }
             list[list.indexOf(button)]->setIcon(buttonIconShip);
@@ -456,21 +476,42 @@ void MainWindow::Processing(QList<QPair<int, QList<QPushButton*>>>& listWithPair
             list[list.indexOf(button)]->setIconSize(QSize(50, 50));
             listWithShips.removeOne(button);
             helpForRemoving.removeOne(button);
-
+            if (indexOfButton == -1) {
+                indexOfButton = list.indexOf(button);
+            }
             if (!setMove) {
                 visited[list.indexOf(button)] = true;
             }
 
             if (field.contains(list.indexOf(button)) && setMove) {
                 field.removeOne(list.indexOf(button));
-                if (moves.size() - 1 >= 0 && moves.indexOf(list.indexOf(button)) != moves.size() - 1)moves.removeOne(list.indexOf(button));
+                if (moves.size() - 1 >= 0 && moves.indexOf(list.indexOf(button)) != moves.size() - 1) {
+                    if (indexOfButton != -1) {
+                        for (int i = 0, counter = 0; counter < moves.size(); i++, counter++) {
+                            if (indexOfButton - moves[0] > 0 && moves[i] - moves[0] > 0) {
+                                moves.push_back(moves[i]);
+                                moves.removeAt(i);
+                                i--;
+                            }
+                            if (indexOfButton - moves[0] < 0 && moves[i] - moves[0] < 0) {
+                                moves.push_back(moves[i]);
+                                moves.removeAt(i);
+                                i--;
+                            }
+                        }
+                    }
+                    moves.removeOne(list.indexOf(button));
+                }
             }
             for (int i = 0; i < listWithPairs.size(); i++) {
                 if (listWithPairs[i].first == 0) {
                     PlaceEmptyCells(list, listWithPairs[i].second, setMove);
-                    if (!moves.isEmpty() && setMove && helpForRemoving.size() == 0 && listWithPairs.size() == 1)moves.clear();
+                    if (!moves.isEmpty() && setMove && helpForRemoving.size() == 0 && listWithPairs.size() == 1) {
+                        moves.clear();
+                        injured = 0;
+                    }
+                    indexOfButton = -1;
                     listWithPairs.removeAt(i);
-                    injured = false;
                     break;
                 }
             }
