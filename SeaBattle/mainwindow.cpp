@@ -9,7 +9,6 @@
 #include <QMessageBox>
 #include <QApplication>
 #include <QProcess>
-#include <QThread>
 #include <QDir>
 #include <QUrl>
 #include <QMovie>
