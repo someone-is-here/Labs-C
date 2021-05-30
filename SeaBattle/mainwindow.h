@@ -47,7 +47,8 @@ private:
     QList<QPair<int,QList<QPushButton*>>> listWithPairs;
     QList<int> moves;
     int num = 0;
-    bool injured = false;
+    int injured = 0;
+    int indexOfButton = -1;
     bool ifSelected = false;
     bool move = true;
     bool start = false;
