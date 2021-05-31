@@ -28,13 +28,14 @@ private slots:
     void ChangeButtonClicked();
     void on_actionDelete_triggered();
     void on_actionDefault_triggered();
+    void on_actionRestart_triggered();
 private:
     Ui::MainWindow *ui;
     QMediaPlayer* mediaPlayer = new QMediaPlayer();
     int fieldSize = 10;
     QVector<int> field;
     QVector<bool> visited;
-    int pos = -1;
+    //int pos = -1;
     QList<QPushButton*> list;
     QList<QPushButton*> listOpponents;
     QList<QPushButton*> listWithShips;
@@ -62,6 +63,7 @@ private:
     void PlaceEmptyCells(QList<QPushButton*> list, QList<QPushButton*> listHelpForRemoving,bool setMove);
     void Processing(QList<QPair<int,QList<QPushButton*>>>& listWithPairs,QList<QPushButton*> list, QList<QPushButton*>& listWithShips,QList<QPushButton*>& helpForRemoving,QPushButton* button,bool setMove);
     void GameResult(bool isWin = true);
+    void Clear();
 };
 
 #endif // MAINWINDOW_H
