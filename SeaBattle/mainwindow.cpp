@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget* parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->resize(1600, 1000);
+    this->resize(1400, 800);
 
     QBrush* brush = new QBrush();
     QPalette* palette = new QPalette();
@@ -335,6 +335,7 @@ void MainWindow::GameResult(bool isWin) {
     QPixmap pixmap(50, 50);
     pixmap.load("D:\\QT\\Projects\\SeaBattle\\img\\icon1.png");
     msgBox.setIconPixmap(pixmap);
+    Clear();
 
     int ret = msgBox.exec();
     switch (ret) {
@@ -442,7 +443,7 @@ void MainWindow::Processing(QList<QPair<int, QList<QPushButton*>>>& listWithPair
                         moves.push_back(save);
 
                         moves.push_back(list.indexOf(button));
-                        pos = list.indexOf(button);
+                        //pos = list.indexOf(button);
                     }
                     listWithPairs.append(QPair<int, QList<QPushButton*>>(counter, listHelpForRemoving));
                     listHelpForRemoving.clear();
@@ -520,6 +521,20 @@ void MainWindow::Processing(QList<QPair<int, QList<QPushButton*>>>& listWithPair
             if (field.contains(list.indexOf(button)) && setMove) {
                 list[list.indexOf(button)]->setIcon(nothing);
                 list[list.indexOf(button)]->setIconSize(QSize(50, 50));
+                if(moves.size() != 0 && indexOfButton != -1){
+                    for (int i = 0, counter = 0; counter < moves.size(); i++, counter++) {
+                        if (indexOfButton - moves[0] > 0 && moves[i] - moves[0] > 0) {
+                            moves.push_back(moves[i]);
+                            moves.removeAt(i);
+                            i--;
+                        }
+                        if (indexOfButton - moves[0] < 0 && moves[i] - moves[0] < 0) {
+                            moves.push_back(moves[i]);
+                            moves.removeAt(i);
+                            i--;
+                        }
+                    }
+                }
             }
             else if (!setMove) {
                 list[list.indexOf(button)]->setIcon(nothing);
@@ -1124,4 +1139,32 @@ void MainWindow::PlaceEmptyCells(QList<QPushButton*> list, QList<QPushButton*> l
             }
         }
     }
+}
+
+void MainWindow::on_actionRestart_triggered(){
+    Clear();
+    qApp->quit();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
+}
+void MainWindow::Clear(){
+    field.clear();
+    visited.clear();
+    list.clear();
+    listOpponents.clear();
+    listWithPairs.clear();
+    listWithShips.clear();
+    listWithShipsOponents.clear();
+    listWithPairsOpponents.clear();
+    helpForRemoving.clear();
+    helpForRemovingOpponetents.clear();
+    queue.clear();
+    queueOpponents.clear();
+    moves.clear();
+
+    num = 0;
+    injured = 0;
+    indexOfButton = -1;
+    ifSelected = false;
+    move = true;
+    start = false;
 }
